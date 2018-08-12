@@ -13,6 +13,10 @@ app.get("/api/campaigns", (req, res) => {
 });
 
 app.get("/api/cards", (req, res) => {
+  res.sendFile(path.join(`${__dirname}/models/cards.json`));
+});
+
+app.get("/api/filters", (req, res) => {
   res.sendFile(path.join(`${__dirname}/models/filters.json`));
 });
 
