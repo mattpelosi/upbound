@@ -8,19 +8,28 @@ class Navbar extends React.Component {
   }
 
   componentDidMount() {
-    axios.getCampaignFilters().then(result => {
-      this.setState({ campaignFilters: result });
+    const requests = [
+      axios.getCampaignFilters(),
+      axios.getCampaigns(),
+      axios.getCards()
+    ];
+    Promise.all(requests).then(res => {
+      this.setState({ campaignFilters: res });
     });
   }
 
   render() {
     const { campaignFilters } = this.state;
     if (campaignFilters === "undefined") {
-      return null;
+      return (
+        <React.Fragment>
+          <div>something</div>
+        </React.Fragment>
+      );
     }
     return (
       <React.Fragment>
-        <div>{this.state.campaignFilters}</div>
+        <div>something</div>
       </React.Fragment>
     );
   }

@@ -5,9 +5,9 @@ export function getCampaigns() {
     method: "get",
     url: "api/campaigns"
   };
-  axios(config)
-    .then(result => {
-      console.log(result);
+  return axios(config)
+    .then(res => {
+      return res.data;
     })
     .catch(err => {
       console.log(new Error(err));
@@ -19,9 +19,9 @@ export function getCards() {
     method: "get",
     url: "api/cards"
   };
-  axios(config)
-    .then(result => {
-      console.log(result);
+  return axios(config)
+    .then(res => {
+      return res.data;
     })
     .catch(err => {
       console.log(new Error(err));
@@ -33,9 +33,9 @@ export function getCampaignFilters() {
     method: "get",
     url: "api/filters"
   };
-  axios(config)
-    .then(result => {
-      console.log(result);
+  return axios(config)
+    .then(res => {
+      return res.data;
     })
     .catch(err => {
       console.log(new Error(err));
