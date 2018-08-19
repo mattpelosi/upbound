@@ -31,7 +31,21 @@ class CardContainer extends React.Component {
   }
 
   render() {
-    return <React.Fragment />;
+    const { cards } = this.state;
+    if (!cards) {
+      return null;
+    }
+    const listedCards = cards.map((card, index) => {
+      return (
+        <div className="card" style={divStyle} key={index}>
+          <img className="card-img-top" src={card.primaryMediaUrl} />
+          <div className="card-body">
+            <p className="card-text">{card.cardDescription}</p>
+          </div>
+        </div>
+      );
+    });
+    return <div>{listedCards}</div>;
   }
 }
 
@@ -43,3 +57,7 @@ export default connect(
   mapStateToProps,
   null
 )(CardContainer);
+
+const divStyle = {
+  width: "18rem"
+};
