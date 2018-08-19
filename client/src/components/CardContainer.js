@@ -11,10 +11,22 @@ class CardContainer extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.campaign !== prevProps.campaign) {
-      const id = this.props.campaign.id;
-      axios.getCardsByCampaignId(id).then(cards => {
-        console.log("react",cards);
-      });
+      if (this.props.campaign.campaignName === "All Campaigns") {
+        axios.getCards().then(cards => {
+          const newState = update(this.state, {
+            cards: { $set: cards }
+          });
+          this.setState(newState);
+        });
+      } else {
+        const id = this.props.campaign.id;
+        axios.getCardsByCampaignId(id).then(cards => {
+          const newState = update(this.state, {
+            cards: { $set: cards }
+          });
+          this.setState(newState);
+        });
+      }
     }
   }
 
