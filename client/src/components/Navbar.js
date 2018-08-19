@@ -28,11 +28,19 @@ class Navbar extends React.Component {
       );
     }
     return (
-      <React.Fragment>
-        <div>something</div>
-      </React.Fragment>
+      <nav class="navbar navbar-light bg-light" style={navStyle}>
+        <a class="navbar-brand" href="#">
+          Navbar
+        </a>
+      </nav>
     );
   }
 }
 
 export default Navbar;
+
+const navStyle = {
+  marginTop: "10px",
+  boxShadow: "0.5px 0px 0.5px 0.5px #edf1f9",
+  border: "1px solid #e6e8ed"
+};
