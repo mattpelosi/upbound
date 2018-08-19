@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import update from "immutability-helper";
 import * as axios from "../services/axios.js";
+import Card from "./Card.js";
 
 class CardContainer extends React.Component {
   constructor(props) {
@@ -36,16 +37,13 @@ class CardContainer extends React.Component {
       return null;
     }
     const listedCards = cards.map((card, index) => {
-      return (
-        <div className="card" style={divStyle} key={index}>
-          <img className="card-img-top" src={card.primaryMediaUrl} />
-          <div className="card-body">
-            <p className="card-text">{card.cardDescription}</p>
-          </div>
-        </div>
-      );
+      return <Card cardData={card} key={index} />;
     });
-    return <div>{listedCards}</div>;
+    return (
+      <div className="d-flex flex-sm-column justify-content-center">
+        <div className="">{listedCards}</div>
+      </div>
+    );
   }
 }
 
@@ -57,7 +55,3 @@ export default connect(
   mapStateToProps,
   null
 )(CardContainer);
-
-const divStyle = {
-  width: "18rem"
-};

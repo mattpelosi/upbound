@@ -15,7 +15,9 @@ class Navbar extends React.Component {
   componentDidMount() {
     const allCampaigns = { campaignName: "All Campaigns" };
     axios.getCampaigns().then(campaigns => {
-      campaigns && campaigns.unshift(allCampaigns);
+      if (campaigns !== "undefined") {
+        campaigns.unshift(allCampaigns);
+      }
       const newState = update(this.state, {
         campaigns: {
           $set: campaigns
