@@ -7,13 +7,47 @@ const cards = JSON.parse(
   fs.readFileSync(`${__dirname}/../models/cards.json`, "utf8")
 );
 
-const loopAndCount = () => {
+const selectRandomCampaignId = () => {
+  const campaign = campaigns[Math.floor(Math.random() * campaigns.length)];
+  return campaign.id;
+};
+
+const buildCampaignIdList = () => {
+  const ids = [];
+  let campaignId = null;
+
   for (let i = 0; i < cards.length; i++) {
-    console.log(i);
+    let randomId = selectRandomCampaignId();
+    if (randomId !== campaignId) {
+      campaignId = randomId;
+    } else {
+      while (randomId === campaignId) {
+        campaignId = selectRandomCampaignId();
+      }
+    }
+    ids.push(campaignId);
+  }
+  return ids;
+};
+
+const newCampaignIds = buildCampaignIdList();
+
+const insertNewCampaignIds = () => {
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].campaignId = newCampaignIds[i];
   }
 };
 
-// loopAndCount();
+insertNewCampaignIds();
+const cardsWithNewIds = JSON.stringify(cards);
 
-console.log(campaigns);
-console.log(cards);
+fs.writeFileSync(
+  `${__dirname}/../models/newCards.json`,
+  cardsWithNewIds,
+  err => {
+    if (err) {
+      throw err;
+    }
+    console.log("The file has been written");
+  }
+);
