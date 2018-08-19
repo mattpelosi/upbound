@@ -12,6 +12,11 @@ app.get("/api/campaigns", (req, res) => {
   res.sendFile(path.join(`${__dirname}/models/campaigns.json`));
 });
 
+app.get("/api/cards/:campaignId", (req, res) => {
+  console.log("Node", req.params.campaignId);
+    res.sendFile(path.join(`${__dirname}/models/cards.json`));
+});
+
 app.get("/api/cards", (req, res) => {
   res.sendFile(path.join(`${__dirname}/models/cards.json`));
 });

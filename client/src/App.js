@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "./components/Navbar.js";
+import CardContainer from "./components/CardContainer.js";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./redux-store/reducers.js";
@@ -12,7 +13,10 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Navbar />
+        <React.Fragment>
+          <Navbar />
+          <CardContainer />
+        </React.Fragment>
       </Provider>
     );
   }

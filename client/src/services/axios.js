@@ -28,6 +28,20 @@ export function getCards() {
     });
 }
 
+export function getCardsByCampaignId(campaignId) {
+  const config = {
+    method: "get",
+    url: `api/cards/${campaignId}`
+  };
+  return axios(config)
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      console.log(new Error(err));
+    });
+}
+
 export function getCampaignFilters() {
   const config = {
     method: "get",
