@@ -28,10 +28,22 @@ class Navbar extends React.Component {
       );
     }
     return (
-      <nav class="navbar navbar-light bg-light" style={navStyle}>
-        <a class="navbar-brand" href="#">
-          Navbar
-        </a>
+      <nav className="navbar navbar-light bg-light" style={navStyle}>
+        <div className="dropdown">
+          <button
+            className="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Dropdown button
+          </button>
+          <div className="dropdown-menu">
+            <a className="dropdown-item">Action</a>
+            <a className="dropdown-item">Another action</a>
+            <a className="dropdown-item">Something else here</a>
+          </div>
+        </div>
+        <a className="navbar-brand">Navbar</a>
       </nav>
     );
   }
