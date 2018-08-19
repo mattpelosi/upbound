@@ -1,6 +1,8 @@
 import React from "react";
 import * as axios from "../services/axios.js";
 import update from "immutability-helper";
+import { connect } from "react-redux";
+import { addSelectedCampaign } from "../redux-store/actions.js";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -29,7 +31,7 @@ class Navbar extends React.Component {
     const newState = update(this.state, {
       selectedCampaign: { $set: campaign }
     });
-    this.setState(newState);
+    this.setState(newState, this.props.addSelectedCampaign(campaign));
   };
 
   render() {
@@ -57,9 +59,10 @@ class Navbar extends React.Component {
       <nav className="navbar navbar-light bg-light" style={navStyle}>
         <div className="dropdown">
           <button
-            className="btn btn-secondary dropdown-toggle"
+            className="btn btn-light dropdown-toggle"
             type="button"
             data-toggle="dropdown"
+            style={btnStyle}
           >
             {campaignName}
           </button>
@@ -70,10 +73,26 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+const mapDispatchToProps = dispatch => ({
+  addSelectedCampaign: campaign => {
+    dispatch(addSelectedCampaign(campaign));
+  }
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Navbar);
 
 const navStyle = {
   marginTop: "10px",
   boxShadow: "0.5px 0px 0.5px 0.5px #edf1f9",
   border: "1px solid #e6e8ed"
+};
+
+const btnStyle = {
+  fontWeight: "100",
+  boxShadow: "0.5px 0px 0.5px 0.5px #edf1f9",
+  border: "1px solid #e6e8ed",
+  color: "#6d6f75"
 };
