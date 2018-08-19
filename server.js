@@ -2,28 +2,13 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const path = require("path");
+const router = require("./routes");
 
 require("dotenv").config();
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(`${__dirname}client/build`)));
-
-app.get("/api/campaigns", (req, res) => {
-  res.sendFile(path.join(`${__dirname}/models/campaigns.json`));
-});
-
-app.get("/api/cards/:campaignId", (req, res) => {
-  console.log("Node", req.params.campaignId);
-  res.sendFile(path.join(`${__dirname}/models/cards.json`));
-});
-
-app.get("/api/cards", (req, res) => {
-  res.sendFile(path.join(`${__dirname}/models/newCards.json`));
-});
-
-app.get("/api/filters", (req, res) => {
-  res.sendFile(path.join(`${__dirname}/models/filters.json`));
-});
+app.use(router);
 
 process.on("unhandledRejection", error => {
   console.log("unhandled Rejection", error);
