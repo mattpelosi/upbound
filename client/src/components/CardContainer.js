@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import update from "immutability-helper";
 import * as axios from "../services/axios.js";
 import Card from "./Card.js";
 
@@ -14,17 +13,13 @@ class CardContainer extends React.Component {
     if (this.props.campaign !== prevProps.campaign) {
       if (this.props.campaign.campaignName === "All Campaigns") {
         axios.getCards().then(cards => {
-          const newState = update(this.state, {
-            cards: { $set: cards }
-          });
+          const newState = { ...this.state, cards: cards };
           this.setState(newState);
         });
       } else {
         const id = this.props.campaign.id;
         axios.getCardsByCampaignId(id).then(cards => {
-          const newState = update(this.state, {
-            cards: { $set: cards }
-          });
+          const newState = { ...this.state, cards: cards };
           this.setState(newState);
         });
       }
