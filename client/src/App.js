@@ -4,6 +4,16 @@ import CardContainer from "./components/CardContainer.js";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./redux-store/reducers.js";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faDatabase,
+  faUserFriends,
+  faEye,
+  faPencilAlt,
+  faCircle
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faDatabase, faUserFriends, faEye, faPencilAlt, faCircle);
 
 const store = createStore(
   reducers,

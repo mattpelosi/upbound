@@ -1,6 +1,5 @@
 import React from "react";
 import * as axios from "../services/axios.js";
-import update from "immutability-helper";
 import { connect } from "react-redux";
 import { addSelectedCampaign } from "../redux-store/actions.js";
 
@@ -15,24 +14,20 @@ class Navbar extends React.Component {
   componentDidMount() {
     const allCampaigns = { campaignName: "All Campaigns" };
     axios.getCampaigns().then(campaigns => {
-      if (campaigns !== "undefined") {
+      if (campaigns !== undefined) {
         campaigns.unshift(allCampaigns);
+        const newState = {
+          ...this.state,
+          ...{ campaigns: campaigns, selectedCampaign: campaigns[0] }
+        };
+        this.setState(newState, this.props.addSelectedCampaign(campaigns[0]));
       }
-      const newState = update(this.state, {
-        campaigns: {
-          $set: campaigns
-        },
-        selectedCampaign: { $set: campaigns[0] }
-      });
-      this.setState(newState);
     });
   }
 
   selectCampaign = index => {
     const campaign = this.state.campaigns[index];
-    const newState = update(this.state, {
-      selectedCampaign: { $set: campaign }
-    });
+    const newState = { ...this.state, selectedCampaign: campaign };
     this.setState(newState, this.props.addSelectedCampaign(campaign));
   };
 
