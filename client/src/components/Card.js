@@ -8,42 +8,79 @@ class Card extends React.Component {
   }
 
   render() {
+    const { currencySymbol } = this.props.cardData.listOfPlans[0].price;
+    const {
+      cardDescription,
+      views,
+      subscribers,
+      totalRevenue
+    } = this.props.cardData;
+
     return (
       <div className="card d-flex" style={cardStyle}>
-        <img
-          className="card-img-top"
-          src={this.props.cardData.primaryMediaUrl}
-          alt="card media"
-          style={imgStyle}
-        />
+        <div style={imgWrapper}>
+          <img
+            className="card-img-top"
+            src={this.props.cardData.primaryMediaUrl}
+            alt="card media"
+            style={imgStyle}
+          />
+          <button style={editButtonStyle}>
+            <FontAwesomeIcon icon="pencil-alt" color="orange" />
+          </button>
+        </div>
+
         <div className="card-body" style={bodyStyle}>
           <p className="card-text" style={textStyle}>
-            {this.props.cardData.cardDescription}
+            {cardDescription}
           </p>
-          <div className="progress" style={progressStyle}>
+          <div className="container" style={progressWrapper}>
             <div
-              className="progress-bar"
-              role="progressbar"
-              aria-valuenow="50"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              //   style={}
-            />
+              className="row justify-content-between"
+              style={stateButtonWrapper}
+            >
+              <span>Text</span>
+              <button className="btn btn-light" style={stateButtonStyle}>
+                <FontAwesomeIcon icon="circle" style={dotStyle} />
+              </button>
+            </div>
+            <div className="progress row" style={progressStyle}>
+              <div
+                className="progress-bar"
+                role="progressbar"
+                aria-valuenow="50"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style={progressBarSyle}
+              />
+            </div>
           </div>
         </div>
         <div className="card-footer" style={footerStyle}>
-          <div className="row">
-            <div className="col d-flex align-items-center justify-content-between" style={iconStyle}>
+          <div className="row d-flex justify-content-between">
+            <div
+              className="col d-flex align-items-center justify-content-between"
+              style={iconStyle}
+            >
               <FontAwesomeIcon icon="database" color="#7B7C7F" size="2x" />
-              <span>$5000</span>
+              <span style={iconText}>
+                {currencySymbol === "" ? "$" : currencySymbol}
+                {totalRevenue}
+              </span>
             </div>
-            <div className="col d-flex align-items-center justify-content-between" style={iconStyle}>
+            <div
+              className="col d-flex align-items-center justify-content-between"
+              style={iconStyle}
+            >
               <FontAwesomeIcon icon="user-friends" color="#7B7C7F" size="2x" />
-              <span>$5000</span>
+              <span style={iconText}>{subscribers}</span>
             </div>
-            <div className="col d-flex align-items-center justify-content-between" style={iconStyle}>
+            <div
+              className="col d-flex align-items-center justify-content-between"
+              style={iconStyle}
+            >
               <FontAwesomeIcon icon="eye" color="#7B7C7F" size="2x" />
-              <span>$5000</span>
+              <span style={iconText}>{views}</span>
             </div>
           </div>
         </div>
@@ -62,8 +99,12 @@ const cardStyle = {
   padding: "1px"
 };
 
-const imgStyle = {
+const imgWrapper = {
   height: "50%"
+};
+
+const imgStyle = {
+  height: "100%"
 };
 
 const textStyle = {
@@ -74,9 +115,16 @@ const textStyle = {
   margin: "0"
 };
 
+const progressWrapper = {
+  height: "40%"
+};
+
 const progressStyle = {
   position: "relative",
-  top: "30px",
+  top: "30%"
+};
+
+const progressBarSyle = {
   height: "5%"
 };
 
@@ -95,4 +143,33 @@ const footerStyle = {
 
 const iconStyle = {
   paddingRight: "0px"
+};
+
+const iconText = {
+  position: "relative",
+  right: "40%"
+};
+
+const editButtonStyle = {
+  position: "absolute",
+  top: "3%",
+  right: "3%",
+  background: "white"
+};
+
+const stateButtonWrapper = {
+  position: "relative",
+  top: "20%"
+};
+
+const stateButtonStyle = {
+  border: "1px solid #e6e8ed",
+  width: "17%"
+};
+
+const dotStyle = {
+  position: "absolute",
+  top: "30%",
+  right: "0.1%",
+  height: "7px"
 };

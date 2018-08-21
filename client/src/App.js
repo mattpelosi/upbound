@@ -8,10 +8,12 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faDatabase,
   faUserFriends,
-  faEye
+  faEye,
+  faPencilAlt,
+  faCircle
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faDatabase, faUserFriends, faEye);
+library.add(faDatabase, faUserFriends, faEye, faPencilAlt, faCircle);
 
 const store = createStore(
   reducers,
