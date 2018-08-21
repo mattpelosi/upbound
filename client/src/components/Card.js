@@ -8,7 +8,7 @@ class Card extends React.Component {
   }
 
   render() {
-    const { currencySymbol } = this.props.cardData.listOfPlans[0].price;
+    const { currencySymbol, amount } = this.props.cardData.listOfPlans[0].price;
     const {
       cardDescription,
       views,
@@ -39,7 +39,7 @@ class Card extends React.Component {
               className="row justify-content-between"
               style={stateButtonWrapper}
             >
-              <span>Text</span>
+              <span>$ {amount} / Month</span>
               <button className="btn btn-light" style={stateButtonStyle}>
                 <FontAwesomeIcon icon="circle" style={dotStyle} />
               </button>
@@ -159,7 +159,9 @@ const editButtonStyle = {
 
 const stateButtonWrapper = {
   position: "relative",
-  top: "20%"
+  top: "20%",
+  color: "#B9BABF",
+  fontSize: "75%"
 };
 
 const stateButtonStyle = {
