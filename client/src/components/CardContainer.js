@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as axios from "../services/axios.js";
-import Card from "./Card.js";
+import Card from "./Card/Card.js";
 
 class CardContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      cards: null
+    };
   }
 
   componentDidUpdate(prevProps) {
