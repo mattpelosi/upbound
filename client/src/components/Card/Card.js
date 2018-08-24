@@ -1,7 +1,7 @@
 import React from "react";
-import CardImage from "./CardImage";
-import CardBody from "./CardBody";
-import CardFooter from "./CardFooter";
+import CardImage from "./Image";
+import CardBody from "./Body";
+import CardFooter from "./Footer";
 
 class Card extends React.Component {
   constructor(props) {
@@ -11,10 +11,12 @@ class Card extends React.Component {
 
   render() {
     return (
-      <div className="card d-flex" style={cardStyle}>
-        <CardImage data={this.props.cardData} />
-        <CardBody data={this.props.cardData} />
-        <CardFooter data={this.props.cardData} />
+      <div className="col-xs-12 col-md-6 col-lg-3">
+        <div className="card" style={cardStyle}>
+          <CardImage data={this.props.cardData} />
+          <CardBody data={this.props.cardData} />
+          <CardFooter data={this.props.cardData} />
+        </div>
       </div>
     );
   }
@@ -23,8 +25,6 @@ class Card extends React.Component {
 export default Card;
 
 const cardStyle = {
-  height: "75vh",
-  width: "18rem",
   margin: "5px",
   border: "0.5px solid #DEDFE5",
   padding: "1px"
