@@ -37,8 +37,10 @@ class CardContainer extends React.Component {
       return <Card cardData={card} key={index} />;
     });
     return (
-      <div className="d-flex flex-sm-column justify-content-center">
-        <div className="">{listedCards}</div>
+      <div className="container">
+        <div className="row">
+          {listedCards}
+        </div>
       </div>
     );
   }
