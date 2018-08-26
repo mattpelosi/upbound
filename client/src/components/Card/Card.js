@@ -11,14 +11,16 @@ class Card extends React.Component {
   }
 
   componentDidMount() {
-    const { currentWorkflow } = this.props.cardData;
     this.setState({ currentWorkflow: "pending" });
   }
 
-  componentDidUpdate(prevProps) {
-    setTimeout(() => {
-      this.setState({ currentWorkflow: "" });
-    }, 5000);
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.currentWorkflow !== prevState.currentWorkflow) {
+      const { currentWorkflow } = this.props.cardData;
+      setTimeout(() => {
+        this.setState({ currentWorkflow: currentWorkflow });
+      }, 5000);
+    }
   }
 
   render() {
@@ -27,7 +29,7 @@ class Card extends React.Component {
     return (
       <div className="col-xs-12 col-md-6 col-lg-3">
         <div className="card" style={cardStyle}>
-          <StateMenu />
+          <StateMenu currentWorkflow={currentWorkflow} />
           <Image data={cardData} currentWorkflow={currentWorkflow} />
           <Body data={cardData} currentWorkflow={currentWorkflow} />
           <Footer data={cardData} currentWorkflow={currentWorkflow} />
