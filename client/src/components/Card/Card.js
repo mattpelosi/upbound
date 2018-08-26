@@ -10,15 +10,27 @@ class Card extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    const { currentWorkflow } = this.props.cardData;
+    this.setState({ currentWorkflow: "pending" });
+  }
+
+  componentDidUpdate(prevProps) {
+    setTimeout(() => {
+      this.setState({ currentWorkflow: "" });
+    }, 5000);
+  }
+
   render() {
+    const { currentWorkflow } = this.state;
     const { cardData } = this.props;
     return (
       <div className="col-xs-12 col-md-6 col-lg-3">
         <div className="card" style={cardStyle}>
           <StateMenu />
-          <Image data={cardData} />
-          <Body data={cardData} />
-          <Footer data={cardData} />
+          <Image data={cardData} currentWorkflow={currentWorkflow} />
+          <Body data={cardData} currentWorkflow={currentWorkflow} />
+          <Footer data={cardData} currentWorkflow={currentWorkflow} />
         </div>
       </div>
     );
