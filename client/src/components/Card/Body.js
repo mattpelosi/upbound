@@ -16,7 +16,7 @@ class CardBody extends React.Component {
         <p className="card-text" style={textStyle}>
           {cardDescription}
         </p>
-        <StateIndicator amount={amount}/>
+        <StateIndicator amount={amount} />
         <div className="progress" style={progressStyle}>
           <div
             className="progress-bar"
