@@ -1,11 +1,16 @@
 import React from "react";
 import StateIndicator from "./StateIndicator";
+import ProgressBar from "./ProgressBar";
 
 class CardBody extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  // componentDidUpdate(prevProps){
+  //   while()
+  // }
 
   render() {
     const { amount } = this.props.data.listOfPlans[0].price;
@@ -17,15 +22,7 @@ class CardBody extends React.Component {
           {cardDescription}
         </p>
         <StateIndicator amount={amount} />
-        <div className="progress" style={progressStyle}>
-          <div
-            className="progress-bar"
-            role="progressbar"
-            aria-valuenow="50"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          />
-        </div>
+        <ProgressBar />
       </div>
     );
   }
@@ -44,11 +41,4 @@ const textStyle = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   margin: "0"
-};
-
-const progressStyle = {
-  position: "relative",
-  top: "30%",
-  height: "10px",
-  background: "#DEDFE5"
 };

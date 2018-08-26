@@ -6,11 +6,33 @@ class StateMenu extends React.Component {
     super(props);
     this.state = {};
   }
+
+  componentDidUpdate(prevProps) {
+    // const { currentWorkflow } = this.props;
+  }
+
   render() {
+    const { currentWorkflow } = this.props;
+
+    if (currentWorkflow === "pending") return null;
+
     return (
-      <button style={editButtonStyle}>
-        <FontAwesomeIcon icon="pencil-alt" color="orange" />
-      </button>
+      <div>
+        <button
+          className="dropdown-toggle"
+          data-toggle="dropdown"
+          style={editButtonStyle}
+        >
+          <FontAwesomeIcon icon="pencil-alt" color="orange" />
+        </button>
+        <div className="dropdown-menu dropdown-menu-right">
+          <a className="dropdown-item">"item"</a>
+          <div className="dropdown-divider" />
+          <a className="dropdown-item">"item"</a>
+          <div className="dropdown-divider" />
+          <a className="dropdown-item">"item"</a>
+        </div>
+      </div>
     );
   }
 }
@@ -18,8 +40,9 @@ class StateMenu extends React.Component {
 export default StateMenu;
 
 const editButtonStyle = {
-    position: "absolute",
-    top: "3%",
-    right: "3%",
-    background: "white"
-  };
+  position: "absolute",
+  top: "3%",
+  right: "3%",
+  background: "white",
+  zIndex: "1"
+};
