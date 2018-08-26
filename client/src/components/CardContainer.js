@@ -7,40 +7,50 @@ class CardContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: null
+      cards: null,
+      filteredCards: []
     };
+  }
+
+  componentDidMount() {
+    if (this.state.cards === null) {
+      axios.getCards().then(cards => {
+        const newState = { ...this.state, cards: cards, filteredCards: cards };
+        this.setState(newState);
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.campaign !== prevProps.campaign) {
       if (this.props.campaign.campaignName === "All Campaigns") {
-        axios.getCards().then(cards => {
-          const newState = { ...this.state, cards: cards };
-          this.setState(newState);
-        });
+        const newState = { ...this.state, filteredCards: this.state.cards };
+        this.setState(newState);
       } else {
         const id = this.props.campaign.id;
-        axios.getCardsByCampaignId(id).then(cards => {
-          const newState = { ...this.state, cards: cards };
-          this.setState(newState);
-        });
+        const filteredCards = this.state.cards.reduce((filtered = [], card) => {
+          if (card.campaignId === id) {
+            filtered.push(card);
+          }
+          return filtered;
+        }, []);
+        const newState = { ...this.state, filteredCards: filteredCards };
+        this.setState(newState);
       }
     }
   }
 
   render() {
-    const { cards } = this.state;
-    if (!cards) {
+    const { filteredCards } = this.state;
+    if (!filteredCards) {
       return null;
     }
-    const listedCards = cards.map((card, index) => {
+    const filtered = filteredCards.map((card, index) => {
       return <Card cardData={card} key={index} />;
     });
     return (
       <div className="container">
-        <div className="row">
-          {listedCards}
-        </div>
+        <div className="row">{filtered}</div>
       </div>
     );
   }

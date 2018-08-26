@@ -1,7 +1,8 @@
 import React from "react";
-import CardImage from "./Image";
-import CardBody from "./Body";
-import CardFooter from "./Footer";
+import Image from "./Image";
+import Body from "./Body";
+import Footer from "./Footer";
+import StateMenu from "./StateMenu";
 
 class Card extends React.Component {
   constructor(props) {
@@ -10,12 +11,14 @@ class Card extends React.Component {
   }
 
   render() {
+    const { cardData } = this.props;
     return (
       <div className="col-xs-12 col-md-6 col-lg-3">
         <div className="card" style={cardStyle}>
-          <CardImage data={this.props.cardData} />
-          <CardBody data={this.props.cardData} />
-          <CardFooter data={this.props.cardData} />
+          <StateMenu />
+          <Image data={cardData} />
+          <Body data={cardData} />
+          <Footer data={cardData} />
         </div>
       </div>
     );
