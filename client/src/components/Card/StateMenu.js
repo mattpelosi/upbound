@@ -19,7 +19,7 @@ class StateMenu extends React.Component {
     return (
       <div>
         <button
-          className="dropdown-toggle"
+          className="dropdown"
           data-toggle="dropdown"
           style={editButtonStyle}
         >

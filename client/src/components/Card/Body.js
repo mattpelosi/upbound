@@ -8,13 +8,12 @@ class CardBody extends React.Component {
     this.state = {};
   }
 
-  // componentDidUpdate(prevProps){
-  //   while()
-  // }
+  componentDidUpdate(prevProps) {}
 
   render() {
     const { amount } = this.props.data.listOfPlans[0].price;
     const { cardDescription } = this.props.data;
+    const { currentWorkflow } = this.props;
 
     return (
       <div className="card-body" style={bodyStyle}>
@@ -22,7 +21,7 @@ class CardBody extends React.Component {
           {cardDescription}
         </p>
         <StateIndicator amount={amount} />
-        <ProgressBar />
+        <ProgressBar currentWorkflow={currentWorkflow} />
       </div>
     );
   }
